@@ -1,4 +1,5 @@
 import telebot
+from telebot import *
 
 bot=telebot.TeleBot("6072034229:AAE2PES80kdX5QNOzEdWzAPjUQW2v526Q6c")
 
@@ -16,8 +17,16 @@ def get_user_text(message):
     elif message.text=="id":
 
         id_text=f"your id is: {message.from_user.id}"
-        
+
         bot.send_message(message.chat.id,id_text,parse_mode="html")
-    
+    if message.text=="photo":
+        photo=open("wget1.png","rb")
+        bot.send_photo(message.chat.id,photo)
+
+@bot.message_handler(content_types=["photo"])
+
+def get_user_photo(message):
+    bot.send_message(message.chat.id, "looks nice")
+   
 
 bot.polling(none_stop=True)
